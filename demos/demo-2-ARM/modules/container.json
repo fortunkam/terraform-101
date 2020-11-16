@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storage-account-name": {
+            "type": "string"
+        },
+        "container-name": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+            "apiVersion": "2019-06-01",
+            "name" : "[concat(parameters('storage-account-name'), '/default/', parameters('container-name'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage-account-name'))]"
+            ]
+        }
+    ],
+    "outputs": {}
+}
